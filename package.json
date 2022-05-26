@@ -1,0 +1,33 @@
+{
+  "name": "paid_project",
+  "version": "1.0.0",
+  "description": "Paid Project Phase 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fegisucepto/Paid_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fegisucepto/Paid_Project/issues"
+  },
+  "homepage": "https://github.com/fegisucepto/Paid_Project#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "install": "^0.13.0",
+    "nodemailer": "^6.7.5",
+    "pg": "^8.7.3",
+    "sequelize": "^6.20.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
+}

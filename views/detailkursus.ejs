@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Daftar Paket Kursus</title>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <style>
+        nav {
+            font-weight: bold;
+        }
+
+        .content {
+            border: 1px solid black;
+        }
+
+        .cards {
+            display: flex;
+            width: 80vw;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top py-3 bg-light mb-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="/home"><img src="../infokuliah.png" alt="Infokuliah.id" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                </span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+
+                    <li class="nav-item"><a class="nav-link active" href="/home/courses">Back Kursus</a></li>
+                    <% if(role==1) { %>
+                        <!-- <li class="nav-item"><a class="nav-link active" href="/home/courses">Arsip</a></li> -->
+                        <%}%>
+                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container main">
+        <h1 class="main">
+            <%= useridentity.fullName%>
+        </h1>
+    </div>
+    <div class="search container main mb-3">
+        <div class="search container mt-2 mb-5 mx-5">
+
+            <form class="d-flex" action="/home/courses" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    name="searchName">
+                <!-- <input class="form-control me-2" type="search" placeholder="Search by desc" aria-label="Search" name="searchDesc"> -->
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+
+        <main>
+            <div class="cards">
+                <div class="row g-3">
+                    <%data.forEach(el=> {%>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card" style="height: 100%">
+                                <img src="<%= el.imageURL %>" class="card-img-top" alt="art"
+                                    style="width: 100%; height: 60%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= el.name %>
+                                    </h5>
+                                    <p class="card-text" style="height: 60%;overflow: auto;">
+                                        <%= el.description %>
+                                    </p>
+                                    <div class="buttons mb-1 mt-1">
+
+                                        <% if(role==1){ %>
+                                            <a href="/home/courses/edit/<%= el.id %>" class="btn btn-warning">Update</a>
+                                            <a href="/home/courses/delete/<%= el.id %>"
+                                                class="btn btn-danger">Delete</a>
+                                            <% } else if(role==2){ %>
+                                                <% if(purchased.filter(element=> element.id == el.id)[0]) {%>
+                                                    <h6>Selesai dilaksanakan</h6>
+                                                    <%} else {%>
+                                                        <a href="/home/detailkursus/Success/<%= el.id %>"
+                                                            class="btn btn-primary"> Akan dilaksanakan </a>
+                                                        <h6>Senin, 30 Juni 2022</h6>
+                                                        <%}%>
+                                                            <% }%>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%})%>
+                </div>
+            </div>
+        </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<footer class="bg-light py-5 sticky-bottom">
+    <div class="container px-4 px-lg-5">
+        <div class="small text-center text-muted">Copyright &copy; 2022 - Infokuliah.id</div>
+    </div>
+</footer>
+
+</html>
